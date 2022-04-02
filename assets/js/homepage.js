@@ -62,6 +62,32 @@ var getRestaurants = function (data) {
     "&radius=2000&limit=10";
 
   console.log(restaurantURL);
+
+  var request = new Request(restaurantURL, {
+    method: "GET",
+    headers: new Headers({
+      Authorization:
+        "Bearer lO79j63ISFGzcfjzGoCxRkKARZG2kQcdr0R7PSB1CuvE9QuVJwBA0R-dzLwAGzGqF3PpdjuTOTHJyPI-R7rh-xZxbka3RPqzWhKLFE7fQr21uCsWim-DT9IS1cNDYnYx",
+      "Content-Type": "application/json",
+    }),
+    mode: "no-cors",
+  });
+
+  fetch(request)
+    .then(function (response) {
+      if (response.ok) {
+        console.log(response);
+        response.json().then(function (data) {
+          console.log(data);
+          displayRestaurants(data);
+        });
+      } else {
+        console.log("Error: yelp response");
+      }
+    })
+    .catch(function (error) {
+      console.log("error with yelp response");
+    });
 };
 
 //  display Restaurants into list items
