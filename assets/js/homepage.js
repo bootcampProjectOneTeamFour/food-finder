@@ -54,6 +54,9 @@ var getRestaurants = function (data) {
   var lon = data.bbox[0];
   var lat = data.bbox[1];
 
+  // remove proxyURL var and call when pushed to live page
+  var proxyURL = "https://cors-anywhere.herokuapp.com/";
+
   var restaurantURL =
     "https://api.yelp.com/v3/businesses/search?latitude=" +
     lat +
@@ -61,28 +64,28 @@ var getRestaurants = function (data) {
     lon +
     "&radius=2000&limit=10";
 
-  console.log(restaurantURL);
+  let myHeaders = new Headers();
+  myHeaders.append("method", "GET");
+  myHeaders.append(
+    "Authorization",
+    "Bearer " +
+      "lO79j63ISFGzcfjzGoCxRkKARZG2kQcdr0R7PSB1CuvE9QuVJwBA0R-dzLwAGzGqF3PpdjuTOTHJyPI-R7rh-xZxbka3RPqzWhKLFE7fQr21uCsWim-DT9IS1cNDYnYx"
+  );
+  myHeaders.append("Content-Type", "application/json");
+  myHeaders.append("mode", "no-cors");
+  myHeaders.append("Access-Control-Allow-Origin", "*");
 
-  var request = new Request(restaurantURL, {
-    method: "GET",
-    headers: new Headers({
-      Authorization:
-        "Bearer lO79j63ISFGzcfjzGoCxRkKARZG2kQcdr0R7PSB1CuvE9QuVJwBA0R-dzLwAGzGqF3PpdjuTOTHJyPI-R7rh-xZxbka3RPqzWhKLFE7fQr21uCsWim-DT9IS1cNDYnYx",
-      "Content-Type": "application/json",
-    }),
-    mode: "no-cors",
-  });
-
-  fetch(request)
-    .then(function (response) {
-      if (response.ok) {
-        console.log(response);
-        response.json().then(function (data) {
+  fetch(proxyURL + restaurantURL, {
+    headers: myHeaders,
+  })
+    .then((res) => {
+      if (res.ok) {
+        res.json().then(function (data) {
           console.log(data);
           displayRestaurants(data);
         });
       } else {
-        console.log("Error: yelp response");
+        console.log("error: yelp response");
       }
     })
     .catch(function (error) {
