@@ -1,6 +1,6 @@
-var userFormEl = document.querySelector("#searchForm");
-var searchInputEl = document.querySelector("#search");
-var restaurantContainerEl = document.querySelector("#container");
+var userFormEl = document.querySelector("#user-form");
+var searchInputEl = document.querySelector("#postal-code");
+var restaurantContainerEl = document.querySelector("#food-list");
 
 // user inputs postal code
 var formSubmitHandler = function (event) {
@@ -11,7 +11,7 @@ var formSubmitHandler = function (event) {
   var postalCode = searchInputEl.value.trim();
 
   if (postalCode) {
-    convertPostalCode(postalCode);
+    getLatLon(postalCode);
 
     // clear old content
     searchInputEl.value = "";
@@ -21,7 +21,7 @@ var formSubmitHandler = function (event) {
 };
 
 // convert postal code to lat/lon
-var convertPostalCode = function () {
+var getLatLon = function () {
   // format the open api url
   var coordinatesUrl =
     "https://api.openrouteservice.org/geocode/search/structured?api_key=5b3ce3597851110001cf624829baf84f92b4448ca3755e68e692125f&postalcode=" +
@@ -30,24 +30,42 @@ var convertPostalCode = function () {
   // make a get request to url
   fetch(coordinatesUrl)
     .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      getLatLon();
+      if (response.ok) {
+        response.json().then(function (data) {
+          getRestaurants(data);
+        });
+      } else {
+        console.log("Error: response");
+      }
     })
     .catch(function (error) {
       console.log("error with convertPostalCode");
     });
 };
 
-// get latitude and longitude from
-var getLatLon = function () {};
+var getRestaurants = function (data) {
+  if (data.length === 0) {
+    restaurantContainerEl.textContent = "No restaurants found.";
+    return;
+  }
 
-// get Restaurants with radius around lat/lon
-var getRestaurants = function () {};
+  restaurantContainerEl.innerHTML = "";
 
-// display Restaurants into list items
-var displayRestaurants = function () {};
+  var lon = data.bbox[0];
+  var lat = data.bbox[1];
+
+  var restaurantURL =
+    "https://api.yelp.com/v3/businesses/search?latitude=" +
+    lat +
+    "&longitude=" +
+    lon +
+    "&radius=2000&limit=10";
+
+  console.log(restaurantURL);
+};
+
+//  display Restaurants into list items
+var displayRestaurants = function (data) {};
 
 // add event listeners to forms
 userFormEl.addEventListener("submit", formSubmitHandler);
