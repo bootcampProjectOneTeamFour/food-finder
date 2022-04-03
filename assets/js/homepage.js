@@ -1,6 +1,6 @@
 var userFormEl = document.querySelector("#user-form");
 var searchInputEl = document.querySelector("#postal-code");
-var restaurantContainerEl = document.querySelector("#food-list");
+var restaurantContainerEl = document.getElementById("food-list");
 
 // user inputs postal code
 var formSubmitHandler = function (event) {
@@ -57,12 +57,12 @@ var getRestaurants = function (data) {
   // remove proxyURL var and call when pushed to live page
   var proxyURL = "https://cors-anywhere.herokuapp.com/";
 
-  var restaurantURL =
+  var restaurantListURL =
     "https://api.yelp.com/v3/businesses/search?latitude=" +
     lat +
     "&longitude=" +
     lon +
-    "&radius=2000&limit=10";
+    "&radius=2000&limit=10&sort_by=rating";
 
   let myHeaders = new Headers();
   myHeaders.append("method", "GET");
@@ -75,7 +75,7 @@ var getRestaurants = function (data) {
   myHeaders.append("mode", "no-cors");
   myHeaders.append("Access-Control-Allow-Origin", "*");
 
-  fetch(proxyURL + restaurantURL, {
+  fetch(proxyURL + restaurantListURL, {
     headers: myHeaders,
   })
     .then((res) => {
@@ -94,7 +94,41 @@ var getRestaurants = function (data) {
 };
 
 //  display Restaurants into list items
-var displayRestaurants = function (data) {};
+var displayRestaurants = function (data) {
+  var cardElement = document.createElement("div");
+  var imageContainer = document.createElement("div");
+  var infoContainer = document.createElement("div");
+  var imageElement = document.createElement("img");
+  var headingElement = document.createElement("h5");
+  var paragraphElement = document.createElement("p");
+
+  cardElement.className = "card";
+  imageContainer.className = "image-container";
+  infoContainer.className = "info-container";
+  imageElement.className = "image";
+  headingElement.className = "heading";
+  paragraphElement.className = "paragraph";
+
+  imageElement.setAttribute("alt", "Image supplied by Restaurant");
+
+  if (data.length === 0) {
+    restaurantContainerEl.textContent = "No restaurants found.";
+    return;
+  }
+  console.log(data);
+
+  // loop over given restaurants
+  for (var i = 0; i < data.length; i++) {
+    imageElement.src = data.businesses[i].image_url;
+    headingElement.innerText = data.businesses[i].name;
+    paragraphElement.innerText = data.businesses[i].rating;
+
+    restaurantContainerEl.appendChild(cardElement);
+    cardElement.append(imageContainer, infoContainer);
+
+    console.log(restaurantContainerEl);
+  }
+};
 
 // add event listeners to forms
 userFormEl.addEventListener("submit", formSubmitHandler);
