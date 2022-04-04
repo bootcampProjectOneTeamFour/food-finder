@@ -62,7 +62,7 @@ var getRestaurants = (data) => {
     lat +
     "&longitude=" +
     lon +
-    "&radius=2000&limit=10&sort_by=rating";
+    "&radius=2000&limit=10&sort_by=distance";
 
   let myHeaders = new Headers();
   myHeaders.append("method", "GET");
@@ -99,18 +99,18 @@ var displayRestaurants = (data) => {
     return;
   }
 
-  for (var i = 0; i < data.length; i++) {
+  for (var i = 0; i < data.businesses.length; i++) {
     var cardHolder = document.createElement("div");
     cardHolder.className =
-      "max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700";
+      "max-w-md m-6 gap-10 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700";
 
     var cardElement = document.createElement("a");
-    cardElement.setAttribute("href", "./restaurant-index.html");
+    cardElement.setAttribute("href", "restaurant-index.html?");
 
     var imageElement = document.createElement("img");
     imageElement.className = "rounded-t-lg";
     imageElement.src = data.businesses[i].image_url;
-    imageElement.alt = "";
+    imageElement.alt = "Image provided by Restaurant";
 
     var infoContainer = document.createElement("div");
     infoContainer.className = "p-5";
@@ -123,15 +123,25 @@ var displayRestaurants = (data) => {
     var paragraphElement = document.createElement("p");
     paragraphElement.className =
       "mb-3 font-normal text-gray-700 dark:text-gray-400";
-    paragraphElement.textContent = data.businesses[i].location;
-  }
-  restaurantCards.appendChild(cardHolder);
-  cardHolder.append(cardElement, imageElement, infoContainer);
-  infoContainer.append(headingElement, paragraphElement);
+    paragraphElement.innerHTML =
+      data.businesses[i].location.display_address[0] +
+      ", " +
+      data.businesses[i].location.display_address[1];
 
-  //cardElement.addEventListener("click", function (event) {});
+    restaurantContainerEl.appendChild(cardHolder);
+    cardHolder.append(cardElement, imageElement, infoContainer);
+    infoContainer.append(headingElement, paragraphElement);
+  }
+  cardElement.addEventListener("click", function (event) {
+    // Submit to Tommy's js code
+  });
 };
 
+// save cardElement.addEventListener history to array of objects
 var saveRestaurants = (event) => {};
+
+// load array of objects (may be able to combine into 1 function)
+var loadRestaurants = (event) => {};
+
 // add event listeners to forms
 userFormEl.addEventListener("submit", formSubmitHandler);
