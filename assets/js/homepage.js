@@ -1,9 +1,10 @@
 var userFormEl = document.querySelector("#user-form");
 var searchInputEl = document.querySelector("#postal-code");
 var restaurantContainerEl = document.getElementById("food-list");
+var restaurantCards = document.getElementById("restaurantCards");
 
 // user inputs postal code
-var formSubmitHandler = function (event) {
+var formSubmitHandler = (event) => {
   // prevent page from refreshing
   event.preventDefault();
 
@@ -21,7 +22,7 @@ var formSubmitHandler = function (event) {
 };
 
 // convert postal code to lat/lon
-var getLatLon = function () {
+var getLatLon = () => {
   // format the open api url
   var coordinatesUrl =
     "https://api.openrouteservice.org/geocode/search/structured?api_key=5b3ce3597851110001cf624829baf84f92b4448ca3755e68e692125f&postalcode=" +
@@ -43,13 +44,12 @@ var getLatLon = function () {
     });
 };
 
-var getRestaurants = function (data) {
+// get object array of restaurants from lat/lon
+var getRestaurants = (data) => {
   if (data.length === 0) {
     restaurantContainerEl.textContent = "No restaurants found.";
     return;
   }
-
-  restaurantContainerEl.innerHTML = "";
 
   var lon = data.bbox[0];
   var lat = data.bbox[1];
@@ -81,7 +81,6 @@ var getRestaurants = function (data) {
     .then((res) => {
       if (res.ok) {
         res.json().then(function (data) {
-          console.log(data);
           displayRestaurants(data);
         });
       } else {
@@ -93,42 +92,46 @@ var getRestaurants = function (data) {
     });
 };
 
-//  display Restaurants into list items
-var displayRestaurants = function (data) {
-  var cardElement = document.createElement("div");
-  var imageContainer = document.createElement("div");
-  var infoContainer = document.createElement("div");
-  var imageElement = document.createElement("img");
-  var headingElement = document.createElement("h5");
-  var paragraphElement = document.createElement("p");
-
-  cardElement.className = "card";
-  imageContainer.className = "image-container";
-  infoContainer.className = "info-container";
-  imageElement.className = "image";
-  headingElement.className = "heading";
-  paragraphElement.className = "paragraph";
-
-  imageElement.setAttribute("alt", "Image supplied by Restaurant");
-
+//  display Restaurants into card elements
+var displayRestaurants = (data) => {
   if (data.length === 0) {
     restaurantContainerEl.textContent = "No restaurants found.";
     return;
   }
-  console.log(data);
 
-  // loop over given restaurants
   for (var i = 0; i < data.length; i++) {
+    var cardHolder = document.createElement("div");
+    cardHolder.className =
+      "max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700";
+
+    var cardElement = document.createElement("a");
+    cardElement.setAttribute("href", "./restaurant-index.html");
+
+    var imageElement = document.createElement("img");
+    imageElement.className = "rounded-t-lg";
     imageElement.src = data.businesses[i].image_url;
-    headingElement.innerText = data.businesses[i].name;
-    paragraphElement.innerText = data.businesses[i].rating;
+    imageElement.alt = "";
 
-    restaurantContainerEl.appendChild(cardElement);
-    cardElement.append(imageContainer, infoContainer);
+    var infoContainer = document.createElement("div");
+    infoContainer.className = "p-5";
 
-    console.log(restaurantContainerEl);
+    var headingElement = document.createElement("h5");
+    headingElement.className =
+      "mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white";
+    headingElement.textContent = data.businesses[i].name;
+
+    var paragraphElement = document.createElement("p");
+    paragraphElement.className =
+      "mb-3 font-normal text-gray-700 dark:text-gray-400";
+    paragraphElement.textContent = data.businesses[i].location;
   }
+  cardHolder.append(cardElement, imageElement, infoContainer);
+  infoContainer.append(headingElement, paragraphElement);
+  restaurantCards.innerHTML = cardHolder;
+
+  //cardElement.addEventListener("click", function (event) {});
 };
 
+var saveRestaurants = (event) => {};
 // add event listeners to forms
 userFormEl.addEventListener("submit", formSubmitHandler);
