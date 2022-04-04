@@ -2,7 +2,9 @@
 
 ## content
 
-added content for now; styling to be added after coordinating with Matthew on Home page
+added content for now; styling to be added after coordinating with Matthew on Home page.  For a rough template, mainly to provide an idea of where information pulled from the API call could go, I've included a screenshot of the webpage as it would appear based on the coding in the CSS stylesheet that was removed.  
+
+![screensheet of styled restaurant-index.html](assets/images/screenshot-nimbusweb.me-2022.04.03-21_19_35.png)
 
 ## header
 
