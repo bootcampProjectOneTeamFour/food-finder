@@ -125,9 +125,9 @@ var displayRestaurants = (data) => {
       "mb-3 font-normal text-gray-700 dark:text-gray-400";
     paragraphElement.textContent = data.businesses[i].location;
   }
+  restaurantCards.appendChild(cardHolder);
   cardHolder.append(cardElement, imageElement, infoContainer);
   infoContainer.append(headingElement, paragraphElement);
-  restaurantCards.innerHTML = cardHolder;
 
   //cardElement.addEventListener("click", function (event) {});
 };
