@@ -10,41 +10,56 @@
   <title>Food Finder</title>
 </head>
 
-<body class="row">
-    <header><!--assume this will be carried over from home page-->  
+<body>
+    <header><!--duplicate for homepage?-->  
         <div class="name">
             <h1>Food Finder</h1>
+            <div class="logo">
+                <img src="/", alt="logo">
+            </div>
         </div>
         <div class="tag-line">
             <h3>Great food is just around the corner!</h3>
         </div>
-        <div class="logo">
-            <img src="/", alt="logo">
-        </div>
+        <nav class="more-info">
+            <ul>
+                <!--navigation-links-->
+                <li>
+                    <a class="about-us" href="/">About US</a>
+                </li>
+                <li>
+                    <a class="FAQ" href="/">FAQ</a>
+                </li>
+                <li>
+                    <a class="restaurants" href="/">Featured Restaurants</a>
+                </li>
+            </ul>
+        </nav>
     </header>
   
     <main>
         <!--left-side-of-container-with-map/walking-directions-to-restaurant-->
-        <div class="col-6 col-md-3" id="directions-container">
-            <div id="to-find-us" class="here-we-are card">
+        <div id="directions-container">
+            <div id="to-find-us" class="here-we-are">
                 <p>Where To Find Us</p>
                 <!--do we need an iframe element with <span></span> here or just something to hold a json string?--> 
             </div><!--here-we-are-->
             <!--to-return-to-search-page-->    
             <div class="return-button">
-                <a href="./index.html" class="btn-back">Return to main page</a>
+                <a href="./index.html" class="btn-back">Back to Search</a>
             </div><!--return-button-->
         </div><!--directions-container-->
-        <!--right-side-container-with-img-of-restaurant-&-url-link-->
         
-        <div class="col-6 col-md-3" id="restaurant-container">
+        <!--right-side-container-with-img-of-restaurant-&-url-link-->
+        <div id="restaurant-container">
             <div class="restaurant-image">
                 <!--will this require an img element with <span></span>-->
                 <a class="restaurant-link" href="/"></a>
             </div><!--restaurant-image-->
             <!--extract short blurb about restaurant here?-->    
             <div class="restaurant-details">
-                <span id="excerpt"><p></p></span>
+                <p>Restaurant Details</p>
+                <p id="excerpt"><span></span></p>
             </div><!--excerpt-->            
         </div><!--restaurant-container-->
     </main>
@@ -54,7 +69,7 @@
             <p>Food Finder</p>
             <p>123 ABC Street</p>
             <p>Toronto, ON M2M 2M2</p><br>
-            <p>ph: (416) 555-5555</p><br>
+            <p>ph: (416) 555-5555</p>
             <p>web-site:<a href="/">www.foodfinder.com</a></p>
         </div><!--contact-info-->
         <div class="col-4 copyright">
