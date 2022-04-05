@@ -2,69 +2,51 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
-  <link rel="stylesheet" href="./assets/css/style.css" />
-  <title>Food Finder</title>
-</head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"/>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <title>Food Finder</title>
+  </head>
 
-<body>
-    <header><!--duplicate for homepage?-->  
-        <div class="name">
-            <h1>Food Finder</h1>
-            <div class="logo">
-                <img src="/", alt="logo">
-            </div>
-        </div>
-        <div class="tag-line">
-            <h3>Great food is just around the corner!</h3>
-        </div>
-        <nav class="more-info">
-            <ul>
-                <!--navigation-links-->
-                <li>
-                    <a class="about-us" href="/">About US</a>
-                </li>
-                <li>
-                    <a class="FAQ" href="/">FAQ</a>
-                </li>
-                <li>
-                    <a class="restaurants" href="/">Featured Restaurants</a>
-                </li>
-            </ul>
-        </nav>
+   <body class="bg-gray-200 flex flex-col justify-between h-screen">
+    <header class="bg-red-800 text-white py-6 px-6 flex space-x-10 sm: text-center w-screen md: text-center">
+      <h1 class="text-3xl font-bold">Food Finder</h1>
+      <p class="italic">Great food just around the corner!</p>
     </header>
   
-    <main>
+    <main class="grid grid-cols-2 h-full align-text-top">
         <!--left-side-of-container-with-map/walking-directions-to-restaurant-->
-        <div id="directions-container">
+        <div class="grid grid-flow-row mt-10 text-center">
             <div id="to-find-us" class="here-we-are">
-                <p>Where To Find Us</p>
+                <h2 class="text-2xl font-bold">Where To Find Us</h2>
                 <!--do we need an iframe element with <span></span> here or just something to hold a json string?--> 
             </div><!--here-we-are-->
-            <!--to-return-to-search-page-->    
-            <div class="return-button">
-                <a href="./index.html" class="btn-back">Back to Search</a>
+            <div class="mt-20">
+                <!--to-return-to-search-page-->    
+                <button type="submit"id="submit-btn"class="text-center rounded-full bg-red-800 text-white hover:bg-red-500 focus:bg-red-900 mb-10 py-2 px-10 ">
+                    <a href="./index.html" class="btn-back">Back to Search</a>
+                </button>
             </div><!--return-button-->
         </div><!--directions-container-->
         
         <!--right-side-container-with-img-of-restaurant-&-url-link-->
-        <div id="restaurant-container">
+        <div class="flex-col-1 mt-10 text-center">
             <div class="restaurant-image">
                 <!--will this require an img element with <span></span>-->
                 <a class="restaurant-link" href="/"></a>
             </div><!--restaurant-image-->
             <!--extract short blurb about restaurant here?-->    
             <div class="restaurant-details">
-                <p>Restaurant Details</p>
+                <h2 class="text-2xl font-bold" >Restaurant Details</h2>
                 <p id="excerpt"><span></span></p>
             </div><!--excerpt-->            
         </div><!--restaurant-container-->
     </main>
-    <footer><!--suggested content for footer-->
-        <div class="col-4 contact-info">
+    <footer class="bg-red-800 text-white py-6 px-6 flex space-x-10 sm: text-center w-screen md: text-center grid grid-cols-3"
+    > <!--suggested content for footer-->
+        <div>
             <p>You can find us at</p>
             <p>Food Finder</p>
             <p>123 ABC Street</p>
@@ -72,10 +54,10 @@
             <p>ph: (416) 555-5555</p>
             <p>web-site:<a href="/">www.foodfinder.com</a></p>
         </div><!--contact-info-->
-        <div class="col-4 copyright">
-            &copy; foodfinder 2022
+        <div>           
+            <p>&copy; foodfinder 2022</p>
         </div><!--copyright-->
-        <div class="col-4 legal">
+        <div>
             <a href="/">Terms & Conditions</a><br>
             <a href="/">Legal</a><br>
             <a href="/">Privacy Policy</a>
