@@ -1,7 +1,7 @@
 var userFormEl = document.querySelector("#user-form");
 var searchInputEl = document.querySelector("#postal-code");
 var restaurantContainerEl = document.getElementById("food-list");
-var restaurantCards = document.getElementById("restaurantCards");
+var historyEl = document.getElementById("historyEl");
 
 // user inputs postal code
 var formSubmitHandler = (event) => {
@@ -62,7 +62,7 @@ var getRestaurants = (data) => {
     lat +
     "&longitude=" +
     lon +
-    "&radius=2000&limit=10&sort_by=distance";
+    "&radius=2000&limit=10&sort_by=rating";
 
   let myHeaders = new Headers();
   myHeaders.append("method", "GET");
@@ -75,6 +75,7 @@ var getRestaurants = (data) => {
   myHeaders.append("mode", "no-cors");
   myHeaders.append("Access-Control-Allow-Origin", "*");
 
+  // remove proxyURL when pushed to live page
   fetch(proxyURL + restaurantListURL, {
     headers: myHeaders,
   })
@@ -94,23 +95,26 @@ var getRestaurants = (data) => {
 
 //  display Restaurants into card elements
 var displayRestaurants = (data) => {
-  if (data.length === 0) {
+  if (data.businesses.length === 0) {
     restaurantContainerEl.textContent = "No restaurants found.";
     return;
   }
 
+  restaurantContainerEl.innerHTML = "";
+
   for (var i = 0; i < data.businesses.length; i++) {
     var cardHolder = document.createElement("div");
     cardHolder.className =
-      "max-w-md m-6 gap-10 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700";
+      "max-w-sm max-h-sm m-6 gap-10 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700";
+    cardHolder.setAttribute("id", "data-number-" + [i]);
 
     var cardElement = document.createElement("a");
-    cardElement.setAttribute("href", "restaurant-index.html?");
+    cardElement.setAttribute("href", "./restaurant-index.html");
 
     var imageElement = document.createElement("img");
     imageElement.className = "rounded-t-lg";
     imageElement.src = data.businesses[i].image_url;
-    imageElement.alt = "Image provided by Restaurant";
+    imageElement.alt = "Image Not Found";
 
     var infoContainer = document.createElement("div");
     infoContainer.className = "p-5";
@@ -129,19 +133,37 @@ var displayRestaurants = (data) => {
       data.businesses[i].location.display_address[1];
 
     restaurantContainerEl.appendChild(cardHolder);
-    cardHolder.append(cardElement, imageElement, infoContainer);
+    cardHolder.appendChild(cardElement);
+    cardElement.append(imageElement, infoContainer);
     infoContainer.append(headingElement, paragraphElement);
   }
+
+  // need help here:
+  // save cardElement.addEventListener history to array of objects
   cardElement.addEventListener("click", function (event) {
-    // Submit to Tommy's js code
+    // store data.businesses[i].name in object
+    var existingEntries = JSON.parse(localStorage.getItem("allRestaurants"));
+    // create key of existingEntries
+    if (existingEntries == null) existingEntries = [];
+    // save object to localStorage array as value
+    localStorage.setItem(
+      "restaurant",
+      JSON.stringify(headingElement.textContent)
+    );
+    // push data.businesses[i].name to existingEntries []
+    existingEntries.push(headingElement.textContent);
+    // create key of all restaurants to load
+    localStorage.setItem("allRestaurants", JSON.stringify(existingEntries));
+
+    historyEl.innerHTML = "";
+    for (var i = 0; i < existingEntries.length; i++) {
+      var historyItem = document.createElement("li");
+      historyItem.setAttribute("class", "");
+      historyItem.textContent = ("restaurant", existingEntries[i]);
+      historyEl.appendChild(historyItem);
+    }
   });
 };
 
-// save cardElement.addEventListener history to array of objects
-var saveRestaurants = (event) => {};
-
-// load array of objects (may be able to combine into 1 function)
-var loadRestaurants = (event) => {};
-
-// add event listeners to forms
+// add event listener to form
 userFormEl.addEventListener("submit", formSubmitHandler);
