@@ -63,5 +63,5 @@ Enhancements
 Ian Ackerman (github.com/ianaack)
 Laurel David (github.com/lnd4812)
 Tommy Otis (github.com/xdatalinq)
-Matthew Smith (github.com/)
-Feven Tsegai (github.com/ )
+Matthew Smith (github.com/mdubb23)
+Feven Tsegai (github.com/feventsegai)
