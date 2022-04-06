@@ -2,6 +2,9 @@ var userFormEl = document.querySelector("#user-form");
 var searchInputEl = document.querySelector("#postal-code");
 var restaurantContainerEl = document.getElementById("food-list");
 var historyEl = document.getElementById("historyEl");
+var iframeEl = document.querySelector("#iframeDirections");
+var targetRestaurantLat = "";
+var targetRestaurantLon = "";
 
 // user inputs postal code
 var formSubmitHandler = (event) => {
@@ -13,6 +16,7 @@ var formSubmitHandler = (event) => {
 
   if (postalCode) {
     getLatLon(postalCode);
+    coordinatesPrep(data);
 
     // clear old content
     searchInputEl.value = "";
@@ -93,7 +97,7 @@ var getRestaurants = (data) => {
     });
 };
 
-//  display Restaurants into card elements
+// display Restaurants into card elements
 var displayRestaurants = (data) => {
   if (data.businesses.length === 0) {
     restaurantContainerEl.textContent = "No restaurants found.";
@@ -108,8 +112,8 @@ var displayRestaurants = (data) => {
       "max-w-sm max-h-sm m-6 gap-10 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700";
     cardHolder.setAttribute("id", "data-number-" + [i]);
 
-    var cardElement = document.createElement("a");
-    cardElement.setAttribute("href", "./restaurant-index.html");
+    var cardElement = document.createElement("div");
+    //cardElement.setAttribute("href", "./restaurant-index.html");
 
     var imageElement = document.createElement("img");
     imageElement.className = "rounded-t-lg";
@@ -136,34 +140,86 @@ var displayRestaurants = (data) => {
     cardHolder.appendChild(cardElement);
     cardElement.append(imageElement, infoContainer);
     infoContainer.append(headingElement, paragraphElement);
+
+    // save cardElement.addEventListener history to array of objects
+    imageElement.addEventListener("click", function (event) {
+      console.log("clicked");
+      var existingEntries = JSON.parse(localStorage.getItem("allRestaurants"));
+      if (existingEntries == null) existingEntries = [];
+      // save object to localStorage array as value
+      localStorage.setItem(
+        "restaurant",
+        JSON.stringify(
+          event.target.nextElementSibling.firstElementChild.textContent
+        )
+      );
+      // push data.businesses[i].name to existingEntries []
+      existingEntries.push(
+        event.target.nextElementSibling.firstElementChild.textContent
+      );
+      // create key of all restaurants to load
+      localStorage.setItem("allRestaurants", JSON.stringify(existingEntries));
+      window.location.href = "./restaurant-index.html";
+    });
   }
-
-  // need help here:
-  // save cardElement.addEventListener history to array of objects
-  cardElement.addEventListener("click", function (event) {
-    // store data.businesses[i].name in object
-    var existingEntries = JSON.parse(localStorage.getItem("allRestaurants"));
-    // create key of existingEntries
-    if (existingEntries == null) existingEntries = [];
-    // save object to localStorage array as value
-    localStorage.setItem(
-      "restaurant",
-      JSON.stringify(headingElement.textContent)
-    );
-    // push data.businesses[i].name to existingEntries []
-    existingEntries.push(headingElement.textContent);
-    // create key of all restaurants to load
-    localStorage.setItem("allRestaurants", JSON.stringify(existingEntries));
-
-    historyEl.innerHTML = "";
-    for (var i = 0; i < existingEntries.length; i++) {
-      var historyItem = document.createElement("li");
-      historyItem.setAttribute("class", "");
-      historyItem.textContent = ("restaurant", existingEntries[i]);
-      historyEl.appendChild(historyItem);
-    }
-  });
 };
+
+var coordinatesPrep = function (data) {
+  var latStart = data.bbox[0];
+  var lonStart = data.bbox[1];
+  var latEnd = targetRestaurantLat;
+  var lonEnd = targetRestaurantLon;
+  getDirections(latStart, latEnd, lonStart, lonEnd);
+};
+
+var getDirections = function (latStart, latEnd, lonStart, lonEnd) {
+  var apiUrl =
+    "https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf6248da3361049f304c83b34cb7e9d07c6238&start=" +
+    latStart +
+    "," +
+    lonStart +
+    "&end=" +
+    latEnd +
+    "," +
+    lonEnd;
+  fetch(apiUrl)
+    .then(function (response) {
+      if (response.ok) {
+        response.json().then(function (data) {
+          console.log("this is directions data" + data);
+          // call function to update iFrame here
+          // updateMap(data);
+        });
+      } else {
+        alert("Error: " + response.statusText);
+      }
+    })
+    .catch(function (error) {
+      alert("Unable to connect to Openroute Service");
+    });
+};
+
+var updateMap = function (data) {
+  var iframeLink = ""; // pull from data passed
+  iframeEl.setAttribute("src", iframeLink);
+};
+
+// keep localStorage history
+var loadHistory = function () {
+  // store data.businesses[i].name in object
+  var existingEntries = JSON.parse(localStorage.getItem("allRestaurants"));
+  // create key of existingEntries
+  if (existingEntries == null) existingEntries = [];
+  historyEl.innerHTML = "";
+  for (var i = 0; i < existingEntries.length; i++) {
+    var historyItem = document.createElement("li");
+    historyItem.setAttribute("class", "");
+    historyItem.textContent = ("restaurant", existingEntries[i]);
+    historyEl.appendChild(historyItem);
+  }
+};
+
+loadHistory();
 
 // add event listener to form
 userFormEl.addEventListener("submit", formSubmitHandler);
