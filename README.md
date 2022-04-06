@@ -43,8 +43,8 @@ An MIT [License](https://github.com/bootcampProjectOneTeamFour/food-finder/LICEN
 
 ## Contribution
 
-- Ian Ackerman (github.com/ianaack)
-- Laurel David (github.com/lnd4812)
-- Tommy Otis (github.com/xdatalinq)
-- Matthew Smith (github.com/mdubb23)
-- Feven Tsegai (github.com/feventsegai)
+- Ian Ackerman (https://github.com/ianaack)
+- Laurel David (https://github.com/lnd4812)
+- Tommy Otis (https://github.com/xdatalinq)
+- Matthew Smith (https://github.com/mdubb23)
+- Feven Tsegai (https://github.com/feventsegai)
