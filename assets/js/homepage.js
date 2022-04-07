@@ -57,10 +57,14 @@ var getRestaurants = (data) => {
   // data variables from openrouteservice API
   lonStart = data.bbox[0];
   latStart = data.bbox[1];
+  console.log(lonStart);
+  console.log(latStart);
 
-  // save coordinate data for directions.js file
   sessionStorage.setItem("lonStart", lonStart);
   sessionStorage.setItem("latStart", latStart);
+
+  // remove proxyURL var and call when pushed to live page
+  var proxyURL = "https://cors-anywhere.herokuapp.com/";
 
   // get Yelp API data via fetch
   var restaurantListURL =
@@ -82,8 +86,9 @@ var getRestaurants = (data) => {
   myHeaders.append("mode", "no-cors");
   myHeaders.append("Access-Control-Allow-Origin", "*");
 
-  // get restaurant list response
-  fetch(restaurantListURL, {
+  // remove proxyURL when pushed to live page
+  // proxyURL
+  fetch(proxyURL + restaurantListURL, {
     headers: myHeaders,
   })
     .then((res) => {
@@ -120,7 +125,6 @@ var displayRestaurants = (data) => {
     // used to wrap all card elements
     var cardElement = document.createElement("div");
     cardElement.setAttribute("id", "data-number-" + [i]);
-
     // image element on card
     var imageElement = document.createElement("img");
     imageElement.className = "rounded-t-lg";
@@ -146,7 +150,6 @@ var displayRestaurants = (data) => {
       ", " +
       data.businesses[i].location.display_address[1];
 
-    // create hidden element to store coordinates data for each business
     var coordinates = document.createElement("div");
     coordinates.className = "hidden";
     coordinates.setAttribute("id", "coordinatesArr");
@@ -164,14 +167,12 @@ var displayRestaurants = (data) => {
 
     // save cardElement.addEventListener history to array of objects
     imageElement.addEventListener("click", function (event) {
-      // save the hidden coordinates content to sessionStorage
       var restoCard = document.getElementById("coordinatesArr").textContent;
       sessionStorage.setItem("coordinatesEnd", restoCard);
 
-      // get all restaurants array
       var existingEntries = JSON.parse(localStorage.getItem("allRestaurants"));
       if (existingEntries == null) existingEntries = [];
-      // save data.businesses[i].name to localStorage as value
+      // save object to localStorage array as value
       localStorage.setItem(
         "restaurant",
         JSON.stringify(
@@ -184,8 +185,7 @@ var displayRestaurants = (data) => {
       );
       // create key of all restaurants to load
       localStorage.setItem("allRestaurants", JSON.stringify(existingEntries));
-      /*on click, refresh page to individual restaurant index file
-      directions.js will take over from here*/
+      // on click, refresh page to individual restaurant index file
       window.location.href = "./restaurant-index.html";
     });
   }
