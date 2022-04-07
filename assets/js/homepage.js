@@ -3,6 +3,9 @@ var userFormEl = document.querySelector("#user-form");
 var searchInputEl = document.querySelector("#postal-code");
 var restaurantContainerEl = document.getElementById("food-list");
 var historyEl = document.getElementById("historyEl");
+var yelpCall = [];
+var lonStart = "";
+var latStart = "";
 
 // user inputs postal code
 var formSubmitHandler = (event) => {
@@ -52,8 +55,12 @@ var getRestaurants = (data) => {
     return;
   }
   // data variables from openrouteservice API
-  var lon = data.bbox[0];
-  var lat = data.bbox[1];
+  lonStart = data.bbox[0];
+  latStart = data.bbox[1];
+  console.log(lonStart);
+  console.log(latStart);
+  sessionStorage.setItem("lonStart", lonStart);
+  sessionStorage.setItem("latStart", latStart);
 
   // remove proxyURL var and call when pushed to live page
   var proxyURL = "https://cors-anywhere.herokuapp.com/";
@@ -61,9 +68,9 @@ var getRestaurants = (data) => {
   // get Yelp API data via fetch
   var restaurantListURL =
     "https://api.yelp.com/v3/businesses/search?latitude=" +
-    lat +
+    latStart +
     "&longitude=" +
-    lon +
+    lonStart +
     "&radius=2000&limit=10&sort_by=rating";
 
   // append new headers to pull Yelp API
@@ -112,11 +119,10 @@ var displayRestaurants = (data) => {
     var cardHolder = document.createElement("div");
     cardHolder.className =
       "max-w-sm max-h-sm m-6 gap-10 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700";
-    cardHolder.setAttribute("id", "data-number-" + [i]);
 
     // used to wrap all card elements
     var cardElement = document.createElement("div");
-
+    cardElement.setAttribute("id", "data-number-" + [i]);
     // image element on card
     var imageElement = document.createElement("img");
     imageElement.className = "rounded-t-lg";
@@ -142,15 +148,40 @@ var displayRestaurants = (data) => {
       ", " +
       data.businesses[i].location.display_address[1];
 
+    // get lat/lon from restaurant data
+    // var coordinatesLat = document.createElement("p");
+    // coordinatesLat.className = "hidden";
+    // coordinatesLat.innerHTML = data.businesses[i].coordinates.latitude;
+
+    // var coordinatesLon = document.createElement("p");
+    // coordinatesLon.className = "hidden";
+    // coordinatesLon.innerHTML = data.businesses[i].coordinates.longitude;
+
+    var coordinates = document.createElement("div");
+    coordinates.className = "hidden";
+    coordinates.setAttribute("id", "coordinatesArr");
+    coordinates.textContent = [
+      data.businesses[i].coordinates.latitude,
+      data.businesses[i].coordinates.longitude,
+    ];
+    console.log(coordinates);
+
     // append everything together
     restaurantContainerEl.appendChild(cardHolder);
     cardHolder.appendChild(cardElement);
     cardElement.append(imageElement, infoContainer);
-    infoContainer.append(headingElement, paragraphElement);
+    infoContainer.append(headingElement, paragraphElement, coordinates);
 
     // save cardElement.addEventListener history to array of objects
     imageElement.addEventListener("click", function (event) {
       console.log("clicked");
+      var clickedId = event.target.parentElement.id;
+      console.log("this is clickedID" + clickedId);
+      var restoCard = document.getElementById("coordinatesArr").textContent;
+      console.log("this is restoCard " + restoCard);
+      sessionStorage.setItem("coordinatesEnd", restoCard);
+      // targetRestaurantLat =
+      // targetRestaurantLon =
       var existingEntries = JSON.parse(localStorage.getItem("allRestaurants"));
       if (existingEntries == null) existingEntries = [];
       // save object to localStorage array as value
