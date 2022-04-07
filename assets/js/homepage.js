@@ -59,8 +59,10 @@ var getRestaurants = (data) => {
   latStart = data.bbox[1];
   console.log(lonStart);
   console.log(latStart);
+
   sessionStorage.setItem("lonStart", lonStart);
   sessionStorage.setItem("latStart", latStart);
+
 
   // remove proxyURL var and call when pushed to live page
   var proxyURL = "https://cors-anywhere.herokuapp.com/";
@@ -165,6 +167,7 @@ var displayRestaurants = (data) => {
       data.businesses[i].coordinates.longitude,
     ];
     console.log(coordinates);
+
 
     // append everything together
     restaurantContainerEl.appendChild(cardHolder);
