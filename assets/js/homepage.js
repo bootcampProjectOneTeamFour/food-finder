@@ -63,9 +63,8 @@ var getRestaurants = (data) => {
   sessionStorage.setItem("lonStart", lonStart);
   sessionStorage.setItem("latStart", latStart);
 
-
   // remove proxyURL var and call when pushed to live page
-  var proxyURL = "https://cors-anywhere.herokuapp.com/";
+  // var proxyURL = "https://cors-anywhere.herokuapp.com/";
 
   // get Yelp API data via fetch
   var restaurantListURL =
@@ -88,7 +87,8 @@ var getRestaurants = (data) => {
   myHeaders.append("Access-Control-Allow-Origin", "*");
 
   // remove proxyURL when pushed to live page
-  fetch(proxyURL + restaurantListURL, {
+  // proxyURL
+  fetch(restaurantListURL, {
     headers: myHeaders,
   })
     .then((res) => {
@@ -167,7 +167,6 @@ var displayRestaurants = (data) => {
       data.businesses[i].coordinates.longitude,
     ];
     console.log(coordinates);
-
 
     // append everything together
     restaurantContainerEl.appendChild(cardHolder);
