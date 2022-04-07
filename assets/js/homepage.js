@@ -120,7 +120,7 @@ var displayRestaurants = (data) => {
     // overall card container
     var cardHolder = document.createElement("div");
     cardHolder.className =
-      "max-w-sm max-h-sm m-6 gap-10 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700";
+      "max-w-sm max-h-sm m-6 gap-10 bg-red-400 rounded-lg border border-red-500 shadow-md dark:bg-gray-800 dark:border-gray-700";
 
     // used to wrap all card elements
     var cardElement = document.createElement("div");
