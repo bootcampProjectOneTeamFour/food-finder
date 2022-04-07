@@ -63,7 +63,6 @@ var getRestaurants = (data) => {
   sessionStorage.setItem("lonStart", lonStart);
   sessionStorage.setItem("latStart", latStart);
 
-
   // remove proxyURL var and call when pushed to live page
   var proxyURL = "https://cors-anywhere.herokuapp.com/";
 
@@ -88,6 +87,7 @@ var getRestaurants = (data) => {
   myHeaders.append("Access-Control-Allow-Origin", "*");
 
   // remove proxyURL when pushed to live page
+  // proxyURL
   fetch(proxyURL + restaurantListURL, {
     headers: myHeaders,
   })
@@ -120,7 +120,7 @@ var displayRestaurants = (data) => {
     // overall card container
     var cardHolder = document.createElement("div");
     cardHolder.className =
-      "max-w-sm max-h-sm m-6 gap-10 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700";
+      "max-w-sm max-h-sm m-6 gap-10 bg-red-400 rounded-lg border border-red-500 shadow-md dark:bg-gray-800 dark:border-gray-700";
 
     // used to wrap all card elements
     var cardElement = document.createElement("div");
@@ -150,15 +150,6 @@ var displayRestaurants = (data) => {
       ", " +
       data.businesses[i].location.display_address[1];
 
-    // get lat/lon from restaurant data
-    // var coordinatesLat = document.createElement("p");
-    // coordinatesLat.className = "hidden";
-    // coordinatesLat.innerHTML = data.businesses[i].coordinates.latitude;
-
-    // var coordinatesLon = document.createElement("p");
-    // coordinatesLon.className = "hidden";
-    // coordinatesLon.innerHTML = data.businesses[i].coordinates.longitude;
-
     var coordinates = document.createElement("div");
     coordinates.className = "hidden";
     coordinates.setAttribute("id", "coordinatesArr");
@@ -168,7 +159,6 @@ var displayRestaurants = (data) => {
     ];
     console.log(coordinates);
 
-
     // append everything together
     restaurantContainerEl.appendChild(cardHolder);
     cardHolder.appendChild(cardElement);
@@ -177,14 +167,9 @@ var displayRestaurants = (data) => {
 
     // save cardElement.addEventListener history to array of objects
     imageElement.addEventListener("click", function (event) {
-      console.log("clicked");
-      var clickedId = event.target.parentElement.id;
-      console.log("this is clickedID" + clickedId);
       var restoCard = document.getElementById("coordinatesArr").textContent;
-      console.log("this is restoCard " + restoCard);
       sessionStorage.setItem("coordinatesEnd", restoCard);
-      // targetRestaurantLat =
-      // targetRestaurantLon =
+
       var existingEntries = JSON.parse(localStorage.getItem("allRestaurants"));
       if (existingEntries == null) existingEntries = [];
       // save object to localStorage array as value
@@ -216,7 +201,7 @@ var loadHistory = function () {
   // create li element for each previously viewed restaurant
   for (var i = 0; i < existingEntries.length; i++) {
     var historyItem = document.createElement("li");
-    historyItem.setAttribute("class", "");
+    historyItem.setAttribute("class", "list-none");
     historyItem.textContent = ("restaurant", existingEntries[i]);
     historyEl.appendChild(historyItem);
   }
