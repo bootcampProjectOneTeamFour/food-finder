@@ -10,44 +10,49 @@
     <title>Food Finder</title>
   </head>
 
-   <body>
-    <header>
-      <h1>Food Finder</h1>
-      <p>Great food just around the corner!</p>
+   <body class="bg-gray-400">
+    <header class="bg-red-400 text-white py-14 px-14 flex text-6xl Sspace-x-10 text-italic sm: text-center w-screen md: text-center">
+      <h1 class="text-5xl font-bold py11 px-11 rounded object-left-top">Food Finder</h1>
+      <div class="text">
+      <p class="text-center text-white text-bold-italic text-4xl">Great food just around the corner!</p>
     </header>
   
-    <main>
+    <main> 
         <!--left-side-of-container-with-map/walking-directions-to-restaurant-->
         <div class="directions-container">
             <div id="to-find-us" class="here-we-are">
-                <h2>Where To Find Us</h2>
+                <h2 class="text-bold text-white text-3xl hover:bg-grey-500">Where To Find Us</h2>
                 <iframe id="iframeDirections" src="https://maps.openrouteservice.org/#/directions/M5S%202X1,Toronto,ON,Canada/260%20College%20Street,Toronto,ON,Canada/data/55,130,32,198,15,97,4,224,38,9,96,59,2,24,5,192,166,6,113,0,184,64,90,1,216,4,224,14,128,22,0,25,46,32,70,66,1,167,32,102,82,3,99,121,250,216,27,136,179,155,22,32,3,141,161,74,1,89,11,14,165,201,171,54,18,103,52,175,70,173,21,180,36,128,98,2,0,7,84,240,34,38,195,148,0,47,40,1,109,113,109,223,186,4,0,102,240,0,219,165,194,22,52,120,0,220,144,1,205,240,193,145,160,116,65,29,209,157,209,161,209,16,193,60,240,227,33,173,173,227,97,209,96,64,1,124,114,128/embed/en-us"></iframe> 
             </div><!--here-we-are-->
             <div>
                 <!--to-return-to-search-page-->    
                 <button type="submit" id="submit-btn" class="btn">
-                    <a href="./index.html" class="btn-back">Back to Search</a>
+                    <a href="./index.html" class="class="text-2xl btn-back>Back to Search</a>
                 </button>
             </div><!--return-button-->
         </div><!--directions-container-->
     </main>
     <footer>
-        <div>
-            <p>You can find us at</p>
-            <p>Food Finder</p>
-            <p>123 ABC Street</p>
-            <p>Toronto, ON M2M 2M2</p><br>
-            <p>ph: (416) 555-5555</p>
-            <p>web-site:<a href="/">www.foodfinder.com</a></p>
+           <p class="text-2xl">You can find us at</p>
+           <div class="col-4 legal">
+            <div class="w-320 h-300 text-bold-white">
+            <p class="text-2xl">Food Finder</p>
+            <p class="text-2xl">123 ABC Street</p>
+            <p class="text-2xl">Toronto, ON M2M 2M2</p><br>
+            <p class="text-2xl">ph: (416) 555-5555</p>
+            <p class="text-2xl">web-site:<a href="/">www.foodfinder.com</a></p>
+            </div>
         </div><!--contact-info-->
-        <div>           
+        <div class="text-center box-border w120 h-100 hover:bg-gray-500">           
             <p>&copy; foodfinder 2022</p>
         </div><!--copyright-->
-        <div>
+        <div class="text-right front-bold-white">
             <a href="/">Terms & Conditions</a><br>
             <a href="/">Legal</a><br>
             <a href="/">Privacy Policy</a>
+        </div>
         </div><!--legal-->
+
     </footer>
   <script src="./assets/js/homepage.js"></script>
 </body>
