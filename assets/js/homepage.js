@@ -59,8 +59,10 @@ var getRestaurants = (data) => {
   latStart = data.bbox[1];
   console.log(lonStart);
   console.log(latStart);
-  sessionStorage.setItem("lonStart", lonStart); 
-  sessionStorage.setItem("latStart", latStart); 
+
+  sessionStorage.setItem("lonStart", lonStart);
+  sessionStorage.setItem("latStart", latStart);
+
 
   // remove proxyURL var and call when pushed to live page
   var proxyURL = "https://cors-anywhere.herokuapp.com/";
@@ -119,7 +121,6 @@ var displayRestaurants = (data) => {
     var cardHolder = document.createElement("div");
     cardHolder.className =
       "max-w-sm max-h-sm m-6 gap-10 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700";
-    
 
     // used to wrap all card elements
     var cardElement = document.createElement("div");
@@ -166,7 +167,7 @@ var displayRestaurants = (data) => {
       data.businesses[i].coordinates.longitude,
     ];
     console.log(coordinates);
-  
+
 
     // append everything together
     restaurantContainerEl.appendChild(cardHolder);
@@ -181,7 +182,7 @@ var displayRestaurants = (data) => {
       console.log("this is clickedID" + clickedId);
       var restoCard = document.getElementById("coordinatesArr").textContent;
       console.log("this is restoCard " + restoCard);
-      sessionStorage.setItem("coordinatesEnd", restoCard); 
+      sessionStorage.setItem("coordinatesEnd", restoCard);
       // targetRestaurantLat =
       // targetRestaurantLon =
       var existingEntries = JSON.parse(localStorage.getItem("allRestaurants"));

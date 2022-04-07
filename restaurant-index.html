@@ -10,17 +10,19 @@
     <title>Food Finder</title>
   </head>
 
-   <body>
+   <body class="bg-gray-400">
     <header>
-      <h1>Food Finder</h1>
-      <p>Great food just around the corner!</p>
+      <div class="bg-red-600">
+        <h1 class="text-white font-bold py-11 px-11 rounded object-left-top text-7xl">Food Finder</h1>
+        <p class="bg-red-600 text-center text-white text-bold-italic text-4xl">Great food just around the corner!</p>
+      </div>
     </header>
   
-    <main>
+    <main class="flex flex-row"> 
         <!--left-side-of-container-with-map/walking-directions-to-restaurant-->
         <div class="directions-container">
             <div id="to-find-us" class="here-we-are">
-                <h2>Where To Find Us</h2>
+                <h2 class="text-bold text-white text-3xl hover:bg-grey-500">Where To Find Us</h2>
                 <iframe
                     id="iframeDirections"
                     width="450"
@@ -29,34 +31,38 @@
                     referrerpolicy="no-referrer-when-downgrade"
                     src=""
                     allowfullscreen>
-                </iframe>
-            </div><!--here-we-are-->
+                </iframe> 
+            </div>
             <div>
                 <!--to-return-to-search-page-->    
                 <button type="submit" id="submit-btn" class="btn">
-                    <a href="./index.html" class="btn-back">Back to Search</a>
+                    <a href="./index.html" class="class="text-2xl btn-back>Back to Search</a>
                 </button>
             <div id="historyEl"></div>
             </div><!--return-button-->
         </div><!--directions-container-->
     </main>
     <footer>
-        <div>
-            <p>You can find us at</p>
-            <p>Food Finder</p>
-            <p>123 ABC Street</p>
-            <p>Toronto, ON M2M 2M2</p><br>
-            <p>ph: (416) 555-5555</p>
-            <p>web-site:<a href="/">www.foodfinder.com</a></p>
+           <p class="text-2xl">You can find us at</p>
+           <div class="col-4 legal">
+            <div class="w-320 h-300 text-bold-white">
+            <p class="text-2xl">Food Finder</p>
+            <p class="text-2xl">123 ABC Street</p>
+            <p class="text-2xl">Toronto, ON M2M 2M2</p><br>
+            <p class="text-2xl">ph: (416) 555-5555</p>
+            <p class="text-2xl">web-site:<a href="/">www.foodfinder.com</a></p>
+            </div>
         </div><!--contact-info-->
-        <div>           
+        <div class="text-center box-border w120 h-100 hover:bg-gray-500">           
             <p>&copy; foodfinder 2022</p>
         </div><!--copyright-->
-        <div>
+        <div class="text-right front-bold-white">
             <a href="/">Terms & Conditions</a><br>
             <a href="/">Legal</a><br>
             <a href="/">Privacy Policy</a>
+        </div>
         </div><!--legal-->
+
     </footer>
   <script src="./assets/js/directions.js"></script>
 </body>
