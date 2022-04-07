@@ -1,21 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
-    />
-    <link rel="stylesheet" href="./assets/css/style.css" />
-    <title>Food Finder</title>
-  </head>
 
-  <body class="">
-    <header class=""></header>
-    <main class=""></main>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <title>Food Finder</title>
+</head>
 
-    <script src="./assets/js/script.js"></script>
-  </body>
+<body class="">
+  <header class="">
+    <h1 class="">Food Finder</h1>
+
+    <p class="">Great food just around the corner!</p>
+  </header>
+  <main class="">
+    <div class="">
+      <div class="">
+        <div class="">
+          <!-- Form title -->
+          <h3 class="">
+            <!--sm: font-semibold text-center-->
+            Get Food!
+          </h3>
+          <!-- Form-->
+          <form id="user-form" class="">
+            <label for="postal-code">Postal/Zip code:</label>
+            <input name="postal-code" id="postal-code" type="text" class="" />
+            <button type="submit" id="submit-btn" class="">
+              Food
+            </button>
+          </form>
+          <div id="historyEl"></div>
+        </div>
+      </div>
+
+      <div class="">
+        <h2 class="">Restaurants in your Area:</h2>
+        <!-- container for restaurant lists -->
+        <div id="food-list"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="./assets/js/homepage.js"></script>
+</body>
+
 </html>

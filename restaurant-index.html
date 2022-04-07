@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"/>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <title>Food Finder</title>
+  </head>
+
+   <body>
+    <header>
+      <h1>Food Finder</h1>
+      <p>Great food just around the corner!</p>
+    </header>
+  
+    <main>
+        <!--left-side-of-container-with-map/walking-directions-to-restaurant-->
+        <div class="directions-container">
+            <div id="to-find-us" class="here-we-are">
+                <h2>Where To Find Us</h2>
+                <iframe
+                    id="iframeDirections"
+                    width="450"
+                    height="250"
+                    frameborder="0" style="border:0"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    src=""
+                    allowfullscreen>
+                </iframe>
+            </div><!--here-we-are-->
+            <div>
+                <!--to-return-to-search-page-->    
+                <button type="submit" id="submit-btn" class="btn">
+                    <a href="./index.html" class="btn-back">Back to Search</a>
+                </button>
+            <div id="historyEl"></div>
+            </div><!--return-button-->
+        </div><!--directions-container-->
+    </main>
+    <footer>
+        <div>
+            <p>You can find us at</p>
+            <p>Food Finder</p>
+            <p>123 ABC Street</p>
+            <p>Toronto, ON M2M 2M2</p><br>
+            <p>ph: (416) 555-5555</p>
+            <p>web-site:<a href="/">www.foodfinder.com</a></p>
+        </div><!--contact-info-->
+        <div>           
+            <p>&copy; foodfinder 2022</p>
+        </div><!--copyright-->
+        <div>
+            <a href="/">Terms & Conditions</a><br>
+            <a href="/">Legal</a><br>
+            <a href="/">Privacy Policy</a>
+        </div><!--legal-->
+    </footer>
+  <script src="./assets/js/directions.js"></script>
+</body>
+
+</html>
