@@ -12,10 +12,10 @@
 
 <body class="bg-gray-400">
   <header>
-    <div class="bg-red-400">
-    <h1 class= "text-white font-bold py-11  px-11 rounded object-left-top text-7xl">Food Finder</h1>
+    <div class="bg-red-600">
+      <h1 class="text-white font-bold py-11  px-11 rounded object-left-top text-7xl">Food Finder</h1>
       <p class="bg-red-600 text-center text-white text-bold-italic text-4xl">Great food just around the corner!</p>
-   </div>
+    </div>
   </header>
   <main class="flex flex-row">
     <div class="flex flex-col w-screen">
@@ -26,19 +26,21 @@
             <!--sm: font-semibold text-center-->
             Get Food!
           </h3>
-           <!-- Form-->
-           <div class="h-30 w-60 border-4">
+          <!-- Form-->
+          <div class="h-30 w-60">
             <form id="user-form" class="px-8 text-centr">
-            <label for="postal-code"> Postal/Zip code:</label>
-            <input name="postal-code" id="postal-code" type="text" class="h-8 text-center border-red-500 rounded-lg mb-4 focus:outline-none focus-border-red-400">
-            <button type="submit" id="submit-btn" class="rounded-full text-white bg-red-500 hover:bg-red-600 focus:bg-red-400 foucs:bg-red-900 mb-6 py-2 px-10">
-              Food
-            </button>
-           </form>
+              <label for="postal-code"> Postal/Zip code:</label>
+              <input name="postal-code" id="postal-code" type="text"
+                class="h-8 text-center border-red-500 rounded-lg mb-4 focus:outline-none focus-border-red-400">
+              <button type="submit" id="submit-btn"
+                class="rounded-full text-white bg-red-500 hover:bg-red-600 focus:bg-red-400 foucs:bg-red-900 mb-6 py-2 px-10">
+                Food
+              </button>
+            </form>
           </div>
-        <div class="" id="historyEl"></div>
+          <div class="" id="historyEl"></div>
+        </div>
       </div>
-   </div>
 
       <div class="">
         <h2 class="text-center text-white text-5xl">Restaurants in your Area:</h2>
