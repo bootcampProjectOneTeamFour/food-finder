@@ -1,56 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-  <link rel="stylesheet" href="./assets/css/style.css" />
-  <title>Food Finder</title>
-</head>
-
-<body class="bg-gray-400">
-  <header>
-    <div class="bg-red-600">
-      <h1 class="text-white font-bold py-11 px-11 rounded object-left-top text-7xl">Food Finder</h1>
-      <p class="bg-red-600 text-center text-white text-bold-italic text-4xl">Great food just around the corner!</p>
-    </div>
-  </header>
-  <main class="flex flex-row">
-    <div class="flex flex-col w-screen">
-      <div class="bg-red-200 bg-center w-60 m-5 rounded-xl shadow-lg">
-        <div class="">
-          <!--Form title -->
-          <h3 class="text-center text-2xl font-thin mb-4 p-6">
-            <!--sm: font-semibold text-center-->
-            Get Food!
-          </h3>
-          <!-- Form-->
-          <div class="h-30 w-60">
-            <form id="user-form" class="px-8 text-center">
-              <label for="postal-code"> Postal/Zip code:</label>
-              <input name="postal-code" id="postal-code" type="text"
-                class="h-8 text-center border-red-500 rounded-lg mb-4 focus:outline-none focus-border-red-400">
-              <button type="submit" id="submit-btn"
-                class="rounded-full text-white bg-red-500 hover:bg-red-600 focus:bg-red-400 focus:bg-red-900 mb-6 py-2 px-10">
-                Food
-              </button>
-            </form>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
+    />
+    <title>Food Finder</title>
+  </head>
+  
+  <body class="bg-gray-400">
+    <header>
+      <div class="bg-red-600">
+        <h1
+          class="text-white font-bold py-11 px-11 rounded object-left-top text-7xl"
+        >
+          Food Finder
+        </h1>
+        <p class="bg-red-600 text-center text-white text-bold-italic text-4xl">
+          Great food just around the corner!
+        </p>
+      </div>
+    </header>
+    <main class="flex flex-row">
+      <div class="flex flex-col w-screen">
+        <div class="bg-red-200 bg-center w-60 m-5 rounded-xl shadow-lg">
+          <div class="">
+            <!--Form title -->
+            <h3 class="text-center text-2xl font-thin mb-4 p-6">
+              <!--sm: font-semibold text-center-->
+              Get Food!
+            </h3>
+            <!-- Form-->
+            <div class="h-30 w-60">
+              <form id="user-form" class="px-8 text-center">
+                <label for="postal-code"> Postal/Zip code:</label>
+                <input
+                  name="postal-code"
+                  id="postal-code"
+                  type="text"
+                  class="h-8 text-center border-red-500 rounded-lg mb-4 focus:outline-none focus-border-red-400"
+                />
+                <button
+                  type="submit"
+                  id="submit-btn"
+                  class="rounded-full text-white bg-red-500 hover:bg-red-600 focus:bg-red-400 focus:bg-red-900 mb-6 py-2 px-10"
+                >
+                  Food
+                </button>
+              </form>
+            </div>
+            <div class="" id="historyEl"></div>
           </div>
-          <div class="" id="historyEl"></div>
+        </div>
+        <div class="">
+          <h2 class="text-center text-white text-5xl">
+            Restaurants in your Area:
+          </h2>
+          <!-- container for restaurant lists -->
+          <div id="food-list"></div>
         </div>
       </div>
-
-      <div class="">
-        <h2 class="text-center text-white text-5xl">Restaurants in your Area:</h2>
-        <!-- container for restaurant lists -->
-        <div id="food-list"></div>
+    </main>
+    <footer>
+      <p class="text-2xl">You can find us at</p>
+      <div class="col-4 legal">
+        <div class="w-320 h-300 text-bold-white">
+          <p class="text-2xl">Food Finder</p>
+          <p class="text-2xl">123 ABC Street</p>
+          <p class="text-2xl">Toronto, ON M2M 2M2</p>
+          <br />
+          <p class="text-2xl">ph: (416) 555-5555</p>
+          <p class="text-2xl">web-site:<a href="/">www.foodfinder.com</a></p>
+        </div>
       </div>
-    </div>
-  </main>
-
-  <script src="./assets/js/homepage.js"></script>
-</body>
-
+      <!--contact-info-->
+      <div class="text-center box-border w120 h-100 hover:bg-gray-500">
+        <p>&copy; foodfinder 2022</p>
+      </div>
+      <!--copyright-->
+      <div class="text-right front-bold-white">
+        <a href="/">Terms & Conditions</a><br />
+        <a href="/">Legal</a><br />
+        <a href="/">Privacy Policy</a>
+      </div>
+    </footer>
+    <script src="./assets/js/homepage.js"></script>
+  </body>
 </html>
