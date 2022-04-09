@@ -27,7 +27,7 @@ The main design uses a combination of HTML, CSS and Javascript.
 
 3/ When the user clicks on the restaurant button, that click calls the function that pulls information from a combination of the Open Route API, and Google Maps to display walking directions to that restaurant.
 
-![screenshot of directions page for site](assets/images/food-finder-directions-page-screen-shot.png)
+![screenshot of directions page for site]("./../assets/images/restaurant-index-page-reformatted.png)
 
 4/ At the same time, the button click saves the user's search history into local storage so that when the user returns to the restaurant directory, the user's search history will be displayed.
 
