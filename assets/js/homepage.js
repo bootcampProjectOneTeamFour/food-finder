@@ -16,7 +16,7 @@ var formSubmitHandler = (event) => {
   var postalCode = searchInputEl.value.trim();
 
   if (postalCode) {
-    getLatLon(postalCode);
+    getLatLon();
 
     // clear old content
     searchInputEl.value = "";
@@ -29,8 +29,9 @@ var formSubmitHandler = (event) => {
 var getLatLon = () => {
   // format the open api url
   var coordinatesUrl =
-    "https://api.openrouteservice.org/geocode/search/structured?api_key=5b3ce3597851110001cf624829baf84f92b4448ca3755e68e692125f&postalcode=" +
-    searchInputEl.value.split(" ").join("").trim();
+    "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+    searchInputEl.value.split(" ").join("").trim() +
+    "&key=AIzaSyCansGW4cqHYnXmRIXWGdrGpcjYSiv3mEs";
 
   // make a get request to url
   fetch(coordinatesUrl)
@@ -55,15 +56,15 @@ var getRestaurants = (data) => {
     return;
   }
   // data variables from openrouteservice API
-  lonStart = data.bbox[0];
-  latStart = data.bbox[1];
+  lonStart = data.results[0].geometry.location.lng;
+  latStart = data.results[0].geometry.location.lat;
   console.log(lonStart);
   console.log(latStart);
 
   sessionStorage.setItem("lonStart", lonStart);
   sessionStorage.setItem("latStart", latStart);
 
-  // remove proxyURL var and call when pushed to live page
+  // proxyURL required based on CORS issues
   var proxyURL = "https://cors-anywhere.herokuapp.com/";
 
   // get Yelp API data via fetch
@@ -125,6 +126,7 @@ var displayRestaurants = (data) => {
     // used to wrap all card elements
     var cardElement = document.createElement("div");
     cardElement.setAttribute("id", "data-number-" + [i]);
+
     // image element on card
     var imageElement = document.createElement("img");
     imageElement.className = "rounded-t-lg";
@@ -150,39 +152,33 @@ var displayRestaurants = (data) => {
       ", " +
       data.businesses[i].location.display_address[1];
 
-    var coordinates = document.createElement("div");
-    coordinates.className = "hidden";
-    coordinates.setAttribute("id", "coordinatesArr");
-    coordinates.textContent = [
+    var coordinates = [
       data.businesses[i].coordinates.latitude,
       data.businesses[i].coordinates.longitude,
     ];
-    console.log(coordinates);
+    paragraphElement.setAttribute("data-coordinates", coordinates);
 
     // append everything together
     restaurantContainerEl.appendChild(cardHolder);
     cardHolder.appendChild(cardElement);
     cardElement.append(imageElement, infoContainer);
-    infoContainer.append(headingElement, paragraphElement, coordinates);
+    infoContainer.append(headingElement, paragraphElement);
 
     // save cardElement.addEventListener history to array of objects
-    imageElement.addEventListener("click", function (event) {
-      var restoCard = document.getElementById("coordinatesArr").textContent;
-      sessionStorage.setItem("coordinatesEnd", restoCard);
+    paragraphElement.addEventListener("click", function (e) {
+      var coordPairString = e.target.getAttribute("data-coordinates");
+
+      sessionStorage.setItem("coordinatesEnd", coordPairString);
 
       var existingEntries = JSON.parse(localStorage.getItem("allRestaurants"));
       if (existingEntries == null) existingEntries = [];
       // save object to localStorage array as value
       localStorage.setItem(
         "restaurant",
-        JSON.stringify(
-          event.target.nextElementSibling.firstElementChild.textContent
-        )
+        JSON.stringify(e.target.previousElementSibling.textContent)
       );
       // push data.businesses[i].name to existingEntries []
-      existingEntries.push(
-        event.target.nextElementSibling.firstElementChild.textContent
-      );
+      existingEntries.push(e.target.previousElementSibling.textContent);
       // create key of all restaurants to load
       localStorage.setItem("allRestaurants", JSON.stringify(existingEntries));
       // on click, refresh page to individual restaurant index file
