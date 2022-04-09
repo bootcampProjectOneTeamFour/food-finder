@@ -21,18 +21,19 @@
 
     </header>
 
-    <main class="flex flex-row">
+    <main class="flex justify-center items-center">
         <!--left-side-of-container-with-map/walking-directions-to-restaurant-->
         <div class="directions-container">
             <div id="to-find-us" class="here-we-are">
-                <h2 class="text-bold text-white text-3xl">Location:</h2>
-                <iframe id="iframeDirections" width="450" height="250" frameborder="0" style="border:0"
+                <h2 class="flex text-bold text-white text-3xl justify-center mt-5 mb-5">Location:</h2>
+                <iframe id="iframeDirections" width="600" height="600" mt-10 frameborder="0" style="border:0"
                     referrerpolicy="no-referrer-when-downgrade" src="" allowfullscreen>
                 </iframe>
             </div>
-            <div class="text-xl">
+            <div class="flex justify-center text-xl">
                 <!--to-return-to-search-page-->
-                <button type="submit" id="submit-btn" class="btn">
+                <button type="submit" id="submit-btn" class="rounded-full text-white bg-red-700 hover:bg-red-600 focus:bg-red-400 focus:bg-red-900 mt-10 mb-6 py-2 px-10 
+                ">
                     <a href="./index.html" class="" text-2xl btn-back>
                         <i class=" fa-solid fa-arrow-left"></i>Back to Search
                     </a>
@@ -43,18 +44,20 @@
         </div>
         <!--directions-container-->
     </main>
-    <div class="mt-96 text-white bg-red-700 p-7">
+    <div class="mt-10 text-white bg-red-700 p-7">
         <div class="grid grid-cols-3 gap-4 content-end">
             <h3 class="text-2xl">
                 Contact Us:
             </h3>
             <!--contact-info-->
-            <ul class="">
-                <li class="">123 ABC Street</li>
-                <li class="">Toronto,
+            <div class="address flex justify-center">
+                <ul class="">
+                    <li class="">123 ABC Street</li>
+                    <li class="">Toronto,
                     ON M2M 2M2</li>
-                <li class="">ph: (416) 555-5555</li>
-            </ul>
+                    <li class="">ph: (416) 555-5555</li>
+                </ul>
+            </div>
         </div>
     </div>
     <footer class="bg-red-600 text-white inset-x-0 bottom-0 flex justify-between p-7 ">
