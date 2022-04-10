@@ -6,18 +6,22 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+  <link rel="stylesheet" ref="./assets/css/style.css"/>
   <title>Food Finder</title>
 </head>
 
 <body class="bg-gray-400">
-  <header class="bg-red-600 text-white py-6 px-6 flex space-x-10 sm: text-center w-screen md: text-center">
-    <h1 class="text-5xl font-bold">
-      Food Finder
-    </h1>
-
-    <p class="italic">Great food just around the corner!</p>
-
-  </header>
+  <header class="bg-red-600 text-white py-6 px-10 flex space-x-10 sm: text-center w-screen md: text-center">
+    <div>
+      <h1 class="text-5xl font-bold">
+        Food Finder
+      </h1>
+    </div>
+     <div>
+          <p class="italic mt-5">Great food just around the corner!</p>
+        </div>
+      </div>
+   </header>
   <main class="flex flex-row">
     <div class="flex">
       <div class="bg-red-200 bg-center w-60 m-5 rounded-xl shadow-lg">
@@ -54,30 +58,25 @@
     </div>
   </main>
   <div class="mt-96 text-white bg-red-700 p-7">
-    <div class="grid grid-cols-3 gap-4 content-end">
-      <h3 class="text-2xl">
-        Contact Us:
-      </h3>
-      <!--contact-info-->
-      <ul class="">
+  </div>
+  <footer class="bg-red-600 text-white inset-x-0 bottom-0 grid grid-cols-2 place-content-between p-7 ">
+    <div class="contact ml-10">
+      <h3 class="text-2xl">Contact Us:</h3>
+      <ul>
         <li class="">123 ABC Street</li>
-        <li class="">Toronto,
-          ON M2M 2M2</li>
+        <li class="">Toronto, ON M2M 2M2</li>
         <li class="">ph: (416) 555-5555</li>
       </ul>
     </div>
-  </div>
-  <footer class="bg-red-600 text-white inset-x-0 bottom-0 flex justify-between p-7 ">
-    <!--copyright-->
-    <div class="text-sm text-left"><a href="/">Terms & Conditions</a><br><a href="/">Legal</a><br><a href="/">Privacy
+    <div class="legal mr-10">
+      <div class="text-sm text-right"><a href="/">Terms & Conditions</a><br><a href="/">Legal</a><br><a href="/">Privacy
         Policy</a>
-      <div class="self-end">
-        <p>&copy;
-          Foodfinder 2022,
-          all rights reserved.</p>
+        <div class="self-end">
+          <p>&copy;
+          Foodfinder 2022, all rights reserved.</p>
+        </div> 
       </div>
     </div>
-    <!--legal-->
   </footer>
   <script src="./assets/js/homepage.js"></script>
 </body>
