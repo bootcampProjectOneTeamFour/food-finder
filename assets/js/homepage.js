@@ -129,7 +129,7 @@ var displayRestaurants = (data) => {
 
     // image element on card
     var imageElement = document.createElement("img");
-    imageElement.className = "rounded-t-lg";
+    imageElement.className = "rounded-t-lg css-target-img";
     imageElement.src = data.businesses[i].image_url;
     imageElement.alt = "Image Not Found";
 
@@ -146,7 +146,7 @@ var displayRestaurants = (data) => {
     // display restaurant address
     var paragraphElement = document.createElement("p");
     paragraphElement.className =
-      "mb-3 font-normal text-gray-700 dark:text-gray-400";
+      "mb-3 font-normal text-gray-700 dark:text-gray-400 css-target";
     paragraphElement.innerHTML =
       data.businesses[i].location.display_address[0] +
       ", " +

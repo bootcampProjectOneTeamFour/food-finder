@@ -1,3 +1,7 @@
-.restorantAnyClass:hover {
+.css-target:hover {
     text-decoration: underline;
+}
+
+.css-target-img:hover {
+    opacity: 0.5;
 }
